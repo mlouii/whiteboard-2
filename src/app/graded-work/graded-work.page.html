@@ -1,0 +1,32 @@
+<ion-content [fullscreen]="true">
+  <app-header></app-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="2" class="sidebar ion-margin-start">
+        <ion-list class="ion-margin-start">
+          <h1 class="sidetab"> Calender </h1>
+          <h1 (click)="navCtrl.navigateForward('home')" class="sidetab"> My Assignments </h1>
+          <h1 (click)="navCtrl.navigateForward('graded-work')" class="sidetab"> <span> - </span> Graded Work </h1>
+          <h1 (click)="navCtrl.navigateForward('focus')" class="sidetab"> Focus Assist </h1>
+        </ion-list>
+      </ion-col>
+      <ion-col size="7" class="main">
+        <ion-grid>
+          <ion-row *ngFor="let item of this.gradedAssignments" [ngStyle]="{'border-left': item.color}">
+            <ion-col size="8">
+              <h1> {{item.name}} </h1>
+              <p> {{item.date}} </p>
+            </ion-col>
+            <ion-col size="4" class="ion-text-right">
+              <h1 [ngStyle]="{'color': greenOrOrange(item.scored/item.total)}"> {{100* item.scored/item.total}}% ({{item.scored}}/{{item.total}}) </h1>
+              <p [ngStyle]="{'color': greenOrRed(item.change)}"> {{item.change}} change in overall grade </p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col size="2" class="ion-text-right">
+        <app-focus-assist-component></app-focus-assist-component>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

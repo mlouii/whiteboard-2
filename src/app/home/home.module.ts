@@ -5,16 +5,22 @@ import { FormsModule } from '@angular/forms';
 
 import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
-import { MessageComponentModule } from '../message/message.module';
+import {ListItemComponent} from "../list-item/list-item.component";
+import {HeaderComponent} from "../header/header.component";
+import {FocusAssistComponentComponent} from "../focus-assist-component/focus-assist-component.component";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MessageComponentModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage]
+  exports: [
+    FocusAssistComponentComponent,
+    ListItemComponent,
+    HeaderComponent
+  ],
+  declarations: [HomePage, ListItemComponent, HeaderComponent, FocusAssistComponentComponent]
 })
 export class HomePageModule {}

@@ -1,25 +1,36 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Inbox
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+
+
 
 <ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">
-        Inbox
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-list>
-    <app-message *ngFor="let message of getMessages()" [message]="message"></app-message>
-  </ion-list>
+  <app-header></app-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="2" class="sidebar ion-margin-start">
+        <ion-list class="ion-margin-start">
+          <h1 class="sidetab"> Calender </h1>
+          <h1 (click)="navCtrl.navigateForward('home')" class="sidetab"> <span> - </span> My Assignments </h1>
+          <h1 (click)="navCtrl.navigateForward('graded-work')" class="sidetab"> Graded Work </h1>
+          <h1 (click)="navCtrl.navigateForward('focus')" class="sidetab"> Focus Assist </h1>
+        </ion-list>
+      </ion-col>
+      <ion-col size="7" class="main">
+        <div class="scroll">
+          <h1> Assignments this week </h1>
+          <ion-list>
+            <app-list-item *ngFor="let assignment of this.thisWeekAssignments" [assignment]="assignment"></app-list-item>
+          </ion-list>
+          <h1> Due Later </h1>
+          <ion-list>
+            <app-list-item *ngFor="let assignment of this.nextWeekAssignments" [assignment]="assignment"></app-list-item>
+          </ion-list>
+        </div>
+      </ion-col>
+
+
+      <ion-col size="2" class="ion-text-right">
+        <h1>Next Due: <span> {{smallestDuration}} </span></h1>
+        <app-focus-assist-component></app-focus-assist-component>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

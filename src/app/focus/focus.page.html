@@ -1,0 +1,35 @@
+<ion-content [fullscreen]="true">
+  <app-header></app-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="2" class="sidebar ion-margin-start">
+        <ion-list class="ion-margin-start">
+          <h1 class="sidetab"> Calender </h1>
+          <h1 (click)="navCtrl.navigateForward('home')" class="sidetab"> My Assignments </h1>
+          <h1 (click)="navCtrl.navigateForward('graded-work')" class="sidetab"> Graded Work </h1>
+          <h1 (click)="navCtrl.navigateForward('focus')" class="sidetab"> <span> - </span>  Focus Assist </h1>
+        </ion-list>
+      </ion-col>
+      <ion-col size="7" class="main">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="7">
+              <h1> Today's Focus Sessions </h1>
+            </ion-col>
+            <ion-col size="4">
+              <h2> Focus time today: {{prettyDuration(totalDayDuration)}} </h2>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngFor="let session of this.focusSessions" [ngStyle]="{'border-left': this.courseService.getColorOfAssignmentID(session.assignment)}" class="ion-margin-top">
+            <ion-col size="4"> {{session.assignment.name}} </ion-col>
+            <ion-col size="3"> {{prettyDuration(session.duration)}} </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col size="2" class="ion-text-right">
+        <app-focus-assist-component></app-focus-assist-component>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

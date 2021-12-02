@@ -1,0 +1,47 @@
+
+
+
+<ion-content [fullscreen]="true">
+  <app-header></app-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="2" class="sidebar ion-margin-start">
+        <ion-list class="ion-margin-start">
+          <h1 class="sidetab"> Calender </h1>
+          <h1 (click)="navCtrl.navigateForward('home')" class="sidetab"> <span> - </span> My Assignments </h1>
+          <h1 (click)="navCtrl.navigateForward('graded-work')" class="sidetab"> Graded Work </h1>
+          <h1 (click)="navCtrl.navigateForward('focus')" class="sidetab"> Focus Assist </h1>
+        </ion-list>
+      </ion-col>
+      <ion-col size="7" class="main">
+        <ion-grid class="ion-padding-start" [ngStyle]="{'border-left': this.courseService.getColorOfAssignmentID(assignment)}">
+          <ion-row>
+            <ion-col size="6" class="ion-no-padding">
+              <h1> {{assignment.name}} </h1>
+              <p> {{courseName}} </p>
+            </ion-col>
+            <ion-col class="ion-text-right ion-no-padding">
+              <h2> {{timeLeft}} </h2>
+              <p class="ion-no-padding ion-no-margin"> {{assignment.totalPoints}} points ({{assignment.gradePercent}}% of total grade) </p>
+              <p class="ion-no-padding ion-no-margin"> Estimated Duration: {{assignment.expectedTime}} hours </p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <p> {{assignment.description}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <input class="ion-margin-bottom ion-padding-top" type="file" id="myFileInput">
+
+        <h1 class="ion-margin-top"> Other Assignments in {{courseName}}</h1>
+        <ion-list>
+          <app-list-item *ngFor="let assignment of this.otherAssignments" [assignment]="assignment"></app-list-item>
+        </ion-list>
+      </ion-col>
+      <ion-col size="2" class="ion-text-right">
+        <app-focus-assist-component></app-focus-assist-component>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

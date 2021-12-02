@@ -1,0 +1,18 @@
+
+
+<div *ngIf="isSelecting">
+  <h2> Focus Time Select </h2>
+  <ion-item>
+    <ion-label position="floating"> How long to focus for? In Minutes</ion-label>
+    <ion-input [(ngModel)] = "selectedMinutes" type="number" min="0" max="60"></ion-input>
+  </ion-item>
+
+    <ion-button (click)="startTask()"> Start Focus Assist </ion-button>
+</div>
+
+<div *ngIf="isActive">
+  <h1>{{minutesLeft}}:{{secondsLeft}}</h1>
+  <h2> Focusing on {{currentAssignment.name}} </h2>
+  <p> A gentle alarm will notify you when its time to take a break </p>
+    <ion-button (click)="stopTask()"> Stop Focus Assist </ion-button>
+</div>

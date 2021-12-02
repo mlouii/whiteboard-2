@@ -24,3 +24,52 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: normal;
+  src: url('assets/Catamaran-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Kanit';
+  font-style: normal;
+  font-weight: normal;
+  src: url('assets/Kanit-Regular.ttf');
+}
+
+h1 {
+  font-family: Kanit;
+}
+
+.time {
+  color: #3F612D;
+}
+
+span {
+  font-size: 30px;
+  color: #3F612D;
+}
+
+.sidetab {
+  font-size: 22px;
+}
+
+.sidetab:hover {
+  color: grey;
+}
+
+.sidebar {
+  border-right: 2px solid lightgray;
+}
+
+.main {
+  padding-left: 2%;
+}
+
+.scroll {
+  height: 80%;
+  overflow-y: scroll;
+}
+

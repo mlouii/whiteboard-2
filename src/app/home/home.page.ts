@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { DataService, Message } from '../services/data.service';
+import {Assignment, CourseServiceService} from "../services/couse-service.service";
+import {FocusService} from "../services/focus.service";
+import {Subscription} from "rxjs";
+import {NavController} from "@ionic/angular";
 
 @Component({
   selector: 'app-home',
@@ -7,16 +10,26 @@ import { DataService, Message } from '../services/data.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  constructor(private data: DataService) {}
 
-  refresh(ev) {
-    setTimeout(() => {
-      ev.detail.complete();
-    }, 3000);
+  assignments: Assignment[];
+  thisWeekAssignments: Assignment[];
+  nextWeekAssignments: Assignment[];
+
+  smallestDuration = "waiting!";
+
+  minutesLeftSub: Subscription;
+  secondsLeftSub: Subscription;
+  minutesLeft:number;
+  secondsLeft:number;
+
+  constructor(private courseService: CourseServiceService, private focusService: FocusService, private navCtrl: NavController) {}
+
+  ionViewWillEnter() {
+    this.assignments = this.courseService.get_all_assignments();
+
+    this.thisWeekAssignments = this.assignments.filter((item) => (item.timeLeft < 168))
+    this.nextWeekAssignments = this.assignments.filter((item) => (item.timeLeft >= 168))
+
+    this.smallestDuration = this.courseService.time_to_string(Math.min(...this.assignments.map((item) => item.timeLeft)))
   }
-
-  getMessages(): Message[] {
-    return this.data.getMessages();
-  }
-
 }
